@@ -69,64 +69,29 @@
               <th><a href="#">№ Білету</a></th>
               <th>Дії</th>
           </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td><img height="30" width="30" src="{% static "img/alytvyn.jpg" %}" class="img-circle"></td>
-              <td><a title="Редагувати" href="{% url "students_edit" 1 %}">Литвин</a></td>
-              <td><a title="Редагувати" href="{% url "students_edit" 1 %}">Олександр</a></td>
-              <td>007</td>
-              <td>
-								<div class="btn-group">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Дія
-										<span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu" role="menu">
-										<li><a href="{% url "students_edit" 1 %}">Редагувати</a></li>
-										<li><a href="/journal/1">Відвідування</a></li>
-										<li><a href="{% url "students_delete" 1 %}">Видалити</a></li>
-									</ul>
-								</div>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td><img height="30" width="30" src="{% static "img/vmoroz.jpg" %}" class="img-circle"></td>
-              <td><a title="Редагувати" href="{% url "students_edit" 2 %}">Мороз</a></td>
-              <td><a title="Редагувати" href="{% url "students_edit" 2 %}">Вікторія</a></td>
-              <td>010</td>
-							<td>
-								<div class="btn-group">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Дія
-										<span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu" role="menu">
-										<li><a href="{% url "students_edit" 2 %}">Редагувати</a></li>
-										<li><a href="/journal/2">Відвідування</a></li>
-										<li><a href="{% url "students_delete" 2 %}">Видалити</a></li>
-									</ul>
-								</div>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td><img height="30" width="30" src="{% static "img/mzheljuk.jpg" %}" class="img-circle"></td>
-              <td><a title="Редагувати" href="{% url "students_edit" 3 %}">Желюк</a></td>
-              <td><a title="Редагувати" href="{% url "students_edit" 3 %}">Михайло</a></td>
-              <td>609</td>
-							<td>
-								<div class="btn-group">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Дія
-										<span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu" role="menu">
-										<li><a href="{% url "students_edit" 3 %}">Редагувати</a></li>
-										<li><a href="/journal/3">Відвідування</a></li>
-										<li><a href="{% url "students_delete" 3 %}">Видалити</a></li>
-									</ul>
-								</div>
-              </td>
-            </tr>
+					<tbody>
+						{% for student in students %}
+						<tr>
+							<td>{{ forloop.counter }}</td>
+							<td><img class="img-circle" src="{% static student.image %}" height="30" width="30" /></td>
+							<td><a href="{% url "students_edit" student.id %}">{{ student.last_name }}</td>
+								<td><a href="{% url "students_edit" student.id %}">{{ student.first_name }}</td>
+									<td>{{ student.ticket }}</td>
+									<td>
+										<div class="btn-group">
+											<button type="button" class="btn btn-default dropdown-toggle"
+											data-toggle="dropdown">Дія
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="{% url "students_edit" student.id %}">Редагувати</a></li>
+											<li><a href="/journal/{{ student.id }}">Відвідування</a></li>
+											<li><a href="{% url "students_delete" student.id %}">Видалити</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							{% endfor %}
           </tbody>
         </table>
 				<!-- End Students Listing -->
