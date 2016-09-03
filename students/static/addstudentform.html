@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Сервіс Обліку Студентів - Форма редагування Студента</title>
+    <meta name="description" value="Система Обліку Студентів Навчального Закладу">
+    <!-- Include styles  -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/main.css" charset="utf-8">
+</head>
+
+<body>
+    <!-- Start Container -->
+    <div class="formcontainer">
+        <!-- Start Header -->
+        <div class="row" id="header">
+            <!-- Logo -->
+            <div class="col-xs-12">
+                <h2>Форма редагування Студента</h1>
+        </div>
+    </div>
+    <!-- End Header -->
+    <form role="form">
+      <div class="form-group">
+          <label for="inputName">Ім'я</label>
+          <input type="text" class="form-control" id="inputName" placeholder="Введіть ім'я">
+        </div>
+      <div class="form-group">
+            <label for="inputSurname">Прізвище</label>
+            <input type="text" class="form-control" id="inputSurname" placeholder="Введіть прізвище">
+        </div>
+        <div class="form-group">
+              <label for="inputSecondName">По-батькові</label>
+              <input type="text" class="form-control" id="inputSecondName" placeholder="Введіть ім'я по-батькові">
+          </div>
+        <div class="form-group">
+              <label for="inputTicketNumber">№ білета</label>
+              <input type="text" class="form-control" id="inputTicketNumber" placeholder="Введіть № білета">
+          </div>
+          <div class="form-group">
+                <label for="inputBirthDate">Дата народження</label>
+                <input type="date" class="form-control" id="inputBirthDate" placeholder="Введіть дату народження">
+            </div>
+          <div class="form-group">
+              <label for="photoInput">Фото</label>
+              <input type="file" id="photoInput">
+              <p class="help-block">Виберіть файл, що буде використовуватися у якості фото на сайті.</p>
+          </div>
+          <div class="form-group">
+              <label>Група: </label>
+              <select class="form-control">
+                <option value="">Усі Студенти</option>
+                <option value="">Ф-07, Литвин Олександр (№ 007)</option>
+                <option value="">Ф-08, Мороз Вікторія (№ 010)</option>
+                <option value="">Ф-09, Желюк Михайло (№ 609)</option>
+              </select>
+          </div>
+          <div class="form-group">
+                <label>Додаткові нотатки</label>
+                <textarea class="form-control" rows="3" placeholder="При потребі введіть додаткову інформацію"></textarea>
+            </div>
+            <div class="confirmbuttons">
+            <button type="button" class="btn btn-primary">Зберегти</button>
+            <button type="button" class="btn btn-primary">Скасувати</button>
+            </div>
+    </form>
+    <!-- Start Footer -->
+    <div class="row" id="footer">
+      <div class="col-xs-12">
+        &copy; 2016 Сервіс Обліку Студентів
+      </div>
+    </div>
+    <!-- End Footer -->
+  </div>
+  <!-- End Container -->
+	<!-- Javascripts Section -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+</body>
+
+</html>

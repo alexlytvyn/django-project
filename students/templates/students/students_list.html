@@ -1,3 +1,5 @@
+{% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html lang="uk">
 
@@ -7,7 +9,7 @@
 	<meta name="description" value="Система Обліку Студентів Навчального Закладу" />
 	<!-- Include Styles -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./css/main.css" charset="utf-8">
+	<link rel="stylesheet" href="{% static "css/main.css" %}" charset="utf-8">
 </head>
 
 <body>
@@ -70,7 +72,7 @@
           <tbody>
             <tr>
               <td>1</td>
-              <td><img height="30" width="30" src="./img/alytvyn.jpg" class="img-circle"></td>
+              <td><img height="30" width="30" src="{% static "img/alytvyn.jpg" %}" class="img-circle"></td>
               <td><a title="Редагувати" href="{% url "students_edit" 1 %}">Литвин</a></td>
               <td><a title="Редагувати" href="{% url "students_edit" 1 %}">Олександр</a></td>
               <td>007</td>
@@ -89,7 +91,7 @@
             </tr>
             <tr>
               <td>2</td>
-              <td><img height="30" width="30" src="./img/vmoroz.jpg" class="img-circle"></td>
+              <td><img height="30" width="30" src="{% static "img/vmoroz.jpg" %}" class="img-circle"></td>
               <td><a title="Редагувати" href="{% url "students_edit" 2 %}">Мороз</a></td>
               <td><a title="Редагувати" href="{% url "students_edit" 2 %}">Вікторія</a></td>
               <td>010</td>
@@ -108,7 +110,7 @@
             </tr>
             <tr>
               <td>3</td>
-              <td><img height="30" width="30" src="./img/mzheljuk.jpg" class="img-circle"></td>
+              <td><img height="30" width="30" src="{% static "img/mzheljuk.jpg" %}" class="img-circle"></td>
               <td><a title="Редагувати" href="{% url "students_edit" 3 %}">Желюк</a></td>
               <td><a title="Редагувати" href="{% url "students_edit" 3 %}">Михайло</a></td>
               <td>609</td>
