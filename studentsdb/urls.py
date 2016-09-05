@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 import students.views.students
 import students.views.groups
+import students.views.journal
 
 urlpatterns = [
     # Students urls
@@ -15,6 +16,9 @@ urlpatterns = [
 	url(r'^groups/add/$', students.views.groups.groups_add, name='groups_add'),
 	url(r'^groups/(?P<gid>\d+)/edit/$', students.views.groups.groups_edit, name='groups_edit'),
 	url(r'^groups/(?P<gid>\d+)/delete/$', students.views.groups.groups_delete, name='groups_delete'),
+
+	# Journal urls
+	url(r'^journal/$', students.views.journal.journal_page, name='journal'),
 
 	url(r'^admin/', include(admin.site.urls)),
 ]
