@@ -1,0 +1,85 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Сервіс обліку студентів - {% block meta_title %}{% endblock meta_title %}</title>
+	<meta name="description" value="Система Обліку Студентів Навчального Закладу" />
+	<!-- Include Styles -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{% static "css/main.css" %}" charset="utf-8">
+	{% block extra_css %}{% endblock extra_css %}
+</head>
+
+<body>
+	<!-- Start container -->
+	<div class="container">
+
+		<!-- Start Header -->
+		<div class="row" id="header">
+
+			<!-- Logo -->
+			<div class="col-xs-8">
+				<h1>Сервіс Обліку Студентів</h1>
+			</div>
+			<!-- Groups Selector -->
+			<div class="col-xs-4" id="group-selector">
+				<strong>Група:</strong>
+				<select>
+					<option value="">Усі Студенти</option>
+					<option value="">Ф-07, Литвин Олександр (№ 007)</option>
+					<option value="">Ф-08, Мороз Вікторія (№ 010)</option>
+					<option value="">Ф-09, Желюк Михайло (№ 609)</option>
+				</select>
+
+			</div>
+
+		</div>
+		<!-- End Header -->
+
+		<!-- Start Subheader -->
+		<div class="row" id="sub-header">
+			<div class="col-xs-12">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="{% url "home" %}">Студенти</a></li>
+					<li role="presentation"><a href="/journal">Відвідування</a></li>
+					<li role="presentation"><a href="{% url "groups" %}">Групи</a></li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- End SubHeader -->
+
+		<!-- Start Main Page Content -->
+		<div class="row" id="content-columns">
+			<div class="col-xs-12" id="content-column">
+				{% comment "Not used alert so far" %}
+				<div class="alert alert-warning">Status update!</div>
+				{% endcomment %}
+				<h2>{% block title %}{% endblock title %}</h2>
+				{% block content %}{% endblock content %}
+
+			</div>
+
+		</div>
+		<!-- End Main Page Content -->
+
+		<!-- Start Footer -->
+		<div class="row" id="footer">
+			<div class="col-xs-12">
+				&copy; 2016 Сервіс Обліку Студентів
+			</div>
+		</div>
+		<!-- End Footer -->
+
+	</div>
+	<!-- End container -->
+	<!-- Javascripts Section -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+	{% block extra_js %}{% endblock extra_js %}
+</body>
+
+</html>
