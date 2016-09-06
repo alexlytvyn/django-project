@@ -3,6 +3,11 @@ from django.db import models
 # Create your models here.
 class Student(models.Model):
 	"""Student Model"""
+	class Meta(object):
+		verbose_name = u"Студент"
+		verbose_name_plural = u"Студенти"
+	def __unicode__(self):
+		return u"%s %s" % (self.first_name, self.last_name)
 	first_name = models.CharField(
 		max_length=256,
 		blank=False,
@@ -31,3 +36,5 @@ class Student(models.Model):
 	notes = models.TextField(
 		blank=True,
 		verbose_name=u"Додаткові нотатки")
+	def __unicode__(self):
+		return u"%s %s" % (self.first_name, self.last_name)
