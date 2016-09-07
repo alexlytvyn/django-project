@@ -21,6 +21,11 @@ class Student(models.Model):
 		blank=True,
 		verbose_name=u"По-батькові",
 		default='')
+	student_group = models.ForeignKey('Group',
+		verbose_name=u"Група",
+		blank=False,
+		null=True,
+		on_delete=models.PROTECT)
 	birthday = models.DateField(
 		blank=False,
 		verbose_name=u"Дата народження",
