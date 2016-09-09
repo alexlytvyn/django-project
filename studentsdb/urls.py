@@ -3,6 +3,7 @@ from django.contrib import admin
 import students.views.students
 import students.views.groups
 import students.views.journal
+import students.views.exams
 from .settings import MEDIA_ROOT, DEBUG
 from django.conf import settings
 from django.views.static import serve
@@ -22,6 +23,12 @@ urlpatterns = [
 
 	# Journal urls
 	url(r'^journal/$', students.views.journal.journal_page, name='journal'),
+
+	# Exams urls
+	url(r'^exams/$', students.views.exams.exams_page, name='exams'),
+	url(r'^exams/add/$', students.views.exams.exams_add, name='exams_add'),
+	url(r'^exams/(?P<gid>\d+)/edit/$', students.views.exams.exams_edit, name='exams_edit'),
+	url(r'^exams/(?P<gid>\d+)/delete/$', students.views.exams.exams_delete, name='exams_delete'),
 
 	url(r'^admin/', include(admin.site.urls)),
 ]
