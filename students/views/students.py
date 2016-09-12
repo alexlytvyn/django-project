@@ -36,8 +36,7 @@ def students_add(request):
 			# errors collection
 			errors = {}
 			# validate student data will go here
-			data = {'middle_name': request.POST.get('middle_name'),
-					'notes': request.POST.get('notes')}
+			data = {'middle_name': request.POST.get('middle_name'), 'notes': request.POST.get('notes')}
 			# validate user input
 			first_name = request.POST.get('first_name', '').strip()
 			if not first_name:
@@ -55,8 +54,8 @@ def students_add(request):
 			else:
 				try:
 					datetime.strptime(birthday, '%Y-%m-%d')
-				except Exception:
-					errors['birthday'] = u"Введіть коректний формат дати (напр. 1984-12-30)"
+				except Exception as e:
+					errors['birthday'] = u"Введіть коректний формат дати (напр. 1984-12-30)" + " exception: " + e.message
 				else:
 					data['birthday'] = birthday
 			ticket = request.POST.get('ticket', '').strip()
@@ -86,40 +85,16 @@ def students_add(request):
 				student = Student(**data)
 				student.save()
 				# redirect to students list
-				return HttpResponseRedirect(reverse('home'))
+				return HttpResponseRedirect(u'%s?status_message=Студента %s %s успішно додано!' % (reverse('home'),first_name, last_name))
 			else:
 				# render form with errors and previous user input
-				return render(request, 'students/students_add.html',
-					{'groups': Group.objects.all().order_by('title'),
-					'errors': errors})
-			errors = {}
-			if not errors:
-				# create student object
-				student = Student(
-					first_name=request.POST['first_name'],
-					last_name=request.POST['last_name'],
-					middle_name=request.POST['middle_name'],
-					birthday=request.POST['birthday'],
-					ticket=request.POST['ticket'],
-					student_group=Group.objects.get(pk=request.POST['student_group']),
-					photo=request.FILES['photo'],
-				)
-				# save it to database
-				student.save()
-				# redirect user to students list
-				return HttpResponseRedirect(reverse('home'))
-			else:
-				# render form with errors and previous user input
-				return render(request, 'students/students_add.html',
-				{'groups': Group.objects.all().order_by('title'),
-				'errors': errors})
+				return render(request, 'students/students_add.html', {'groups': Group.objects.all().order_by('title'), 'errors': errors})
 		elif request.POST.get('cancel_button') is not None:
 			# redirect to home page on cancel button
-			return HttpResponseRedirect(reverse('home'))
+			return HttpResponseRedirect(u'%s?status_message=Додавання студента скасовано!' %reverse('home'))
 	else:
 		# initial form render
 		return render(request, 'students/students_add.html', {'groups': Group.objects.all().order_by('title')})
-
 def students_edit(request, sid):
 	return HttpResponse('<h1>Edit Student %s</h1>' % sid)
 def students_delete(request, sid):
