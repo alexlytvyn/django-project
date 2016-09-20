@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from studentsdb.settings import ADMIN_EMAIL
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.views.generic.edit import FormView
-from django.core.mail import send_mail
-from studentsdb.settings import ADMIN_EMAIL
 class ContactForm(forms.Form):
 	def __init__(self, *args, **kwargs):
 		# call original initializator
@@ -47,7 +47,6 @@ class ContactView(FormView):
             self.message = u'Під час відправки листа виникла непередбачувана помилка. Спробуйте скористатись даною формою пізніше.'
         else:
             self.message = u'Повідомлення успішно надіслано.'
-
         return super(ContactView, self).form_valid(form)
     def get_success_url(self):
         return u'%s?status_message=%s' % (reverse('contact_admin'), self.message)
