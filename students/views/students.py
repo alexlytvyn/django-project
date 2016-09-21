@@ -72,9 +72,8 @@ class StudentCreateView(CreateView):
     model = Student
     template_name = 'students/students_edit.html'
     form_class = StudentCreateForm
-    #success_url =
     def get_success_url(self):
-			return u'%s?status_message=Студента %s %s успішно додано!' % (reverse('home'), self.request.POST.get('first_name'), self.request.POST.get('last_name'))
+		return u'%s?status_message=Студента %s %s успішно додано!' % (reverse('home'), self.request.POST.get('first_name'), self.request.POST.get('last_name'))
 
 # Клас-"в'юшка" редагування студента
 class StudentUpdateView(UpdateView):
@@ -82,10 +81,16 @@ class StudentUpdateView(UpdateView):
     template_name = 'students/students_edit.html'
     form_class = StudentUpdateForm
     def get_success_url(self):
-        return u'%s?status_message=Студента %s %s успішно збережено!' % (reverse('home'),
-            self.request.POST.get('first_name'), self.request.POST.get('last_name'))
+        return u'%s?status_message=Студента %s %s успішно збережено!' % (reverse('home'), self.request.POST.get('first_name'), self.request.POST.get('last_name'))
     def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button'):
             return HttpResponseRedirect(u'%s?status_message=Редагування студента відмінено!' % reverse('home'))
         else:
             return super(StudentUpdateView, self).post(request, *args, **kwargs)
+
+# Клас-"в'юшка" для видалення студента
+class StudentDeleteView(DeleteView):
+	model = Student
+	template_name = 'students/students_confirm_delete.html'
+	def get_success_url(self):
+		return u'%s?status_message=Студента успішно видалено!' % reverse('home')
