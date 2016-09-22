@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from ..models import Student, Group
+from ..models import Student
 from datetime import datetime
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.forms import ModelForm
@@ -34,9 +34,6 @@ def students_list(request):
 		students = paginator.page(paginator.num_pages)
 	return render(request, 'students/students_list.html',
 		{'students': students})
-
-def students_delete(request, sid):
-	return HttpResponse('<h1>Delete Student %s</h1>' % sid)
 
 # Клас форми додавання студента
 class StudentCreateForm(ModelForm):
