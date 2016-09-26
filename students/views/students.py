@@ -58,11 +58,28 @@ class StudentCreateForm(ModelForm):
 			Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
 			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'home' %}?status_message=Додавання студента скасовано!'>Скасувати</a>"),
 		))
-class StudentUpdateForm(StudentCreateForm):
+class StudentUpdateForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = '__all__'
     def __init__(self, *args, **kwargs):
         super(StudentUpdateForm, self).__init__(*args, **kwargs)
-        self.helper.form_action = reverse('students_edit', kwargs = {'pk': kwargs['instance'].id})
-
+        self.helper = FormHelper(self)
+        # set form tag attributes
+        self.helper.form_action = reverse('students_edit', kwargs={'pk': kwargs['instance'].id})
+        self.helper.form_method = 'POST'
+        self.helper.form_class = 'form-horizontal'
+        # set form field properties
+        self.helper.help_text_inline = True
+        self.helper.html5_required = True
+        self.helper.label_class = 'col-sm-2 control-label'
+        self.helper.field_class = 'col-sm-10'
+        # add buttons
+        self.helper.layout.append(FormActions(
+			Div(css_class = self.helper.label_class),
+			Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
+			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'home' %}?status_message=Редагування студента скасовано!'>Скасувати</a>"),
+		))
 # Клас-"в'юшка" додавання студента
 class StudentCreateView(CreateView):
     model = Student
