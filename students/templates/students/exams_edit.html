@@ -1,0 +1,13 @@
+{% extends "students/base.html" %}
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+{% block meta_title %} {% if 'add/' in request.path %} Додати Іспит {% else %} Редагувати Іспит {% endif %} {% endblock meta_title %}
+{% block title %} {% if 'add/' in request.path %} Додати Іспит {% else %} Редагувати Іспит {% endif %} {% endblock title %}
+{% block status_message %}
+{% if form.errors %}
+<div class="alert alert-warning" role="alert">Будь ласка, виправте наступні помилки</div>
+{% endif %}
+{% endblock %}
+{% block content %}
+{% crispy form %}
+{% endblock content %}

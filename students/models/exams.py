@@ -10,13 +10,13 @@ class Exam(models.Model):
         verbose_name=u"Предмет")
     examdate = models.DateTimeField(
         blank=False,
-        verbose_name=u"Дата і час проведення")
+        verbose_name=u"Дата і час проведення\nу форматі РРРР-ММ-ДД ГГ:ХХ:СС")
     teacher = models.CharField(
         max_length=256,
         blank=False,
         verbose_name=u"Викладач")
     exam_group = models.ForeignKey(
-		'Group', 
+		'Group',
 		verbose_name=u'Група',
     	blank=False,
     	null=True,)

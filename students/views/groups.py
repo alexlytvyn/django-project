@@ -93,7 +93,7 @@ class GroupUpdateView(UpdateView):
     template_name = 'students/groups_edit.html'
     form_class = GroupUpdateForm
     def get_success_url(self):
-        return u'%s?status_message=Групу %s успішно збережено!' % (reverse('groups'), self.request.POST.get('title'))
+        return u'%s?status_message=Групу %s успішно редаговано!' % (reverse('groups'), self.request.POST.get('title'))
     def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button'):
             return HttpResponseRedirect(u'%s?status_message=Редагування групи відмінено!' % reverse('groups'))

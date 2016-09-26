@@ -10,6 +10,7 @@ from django.views.static import serve
 from students.views.contact_admin import ContactView
 from students.views.students import StudentCreateView, StudentUpdateView, StudentDeleteView
 from students.views.groups import GroupCreateView, GroupUpdateView, GroupDeleteView
+from students.views.exams import ExamCreateView, ExamUpdateView, ExamDeleteView
 
 urlpatterns = [
     # Students urls
@@ -29,9 +30,9 @@ urlpatterns = [
 
 	# Exams urls
 	url(r'^exams/$', students.views.exams.exams_page, name='exams'),
-	url(r'^exams/add/$', students.views.exams.exams_add, name='exams_add'),
-	url(r'^exams/(?P<gid>\d+)/edit/$', students.views.exams.exams_edit, name='exams_edit'),
-	url(r'^exams/(?P<gid>\d+)/delete/$', students.views.exams.exams_delete, name='exams_delete'),
+	url(r'^exams/add/$', ExamCreateView.as_view(), name='exams_add'),
+	url(r'^exams/(?P<pk>\d+)/edit/$', ExamUpdateView.as_view(), name='exams_edit'),
+	url(r'^exams/(?P<pk>\d+)/delete/$', ExamDeleteView.as_view(), name='exams_delete'),
 
 	# Contact Admin Form
 	url(r'^contact-admin/$', ContactView.as_view(), name='contact_admin'),
