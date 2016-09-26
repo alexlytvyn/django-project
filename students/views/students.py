@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from ..models import Student
+from ..models import Student, Group
 from datetime import datetime
 from django.views.generic import CreateView, UpdateView, DeleteView
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Div, HTML
 from crispy_forms.bootstrap import FormActions
@@ -58,7 +58,6 @@ class StudentCreateForm(ModelForm):
 			Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
 			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'home' %}?status_message=Додавання студента скасовано!'>Скасувати</a>"),
 		))
-# Клас форми редагування студента (наслідується від класу форми додавання студента)
 class StudentUpdateForm(StudentCreateForm):
     def __init__(self, *args, **kwargs):
         super(StudentUpdateForm, self).__init__(*args, **kwargs)
