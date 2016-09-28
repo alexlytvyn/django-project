@@ -5,6 +5,7 @@ from django.forms import ModelForm, ValidationError
 from models.students import Student
 from models.groups import Group
 from models.exams import Exam
+from models.monthjournal import MonthJournal
 class StudentFormAdmin(ModelForm):
     def clean_student_group(self):
         """Check if student is leader in any group.
@@ -51,3 +52,4 @@ class GroupAdmin(admin.ModelAdmin):
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Exam)
+admin.site.register(MonthJournal)
