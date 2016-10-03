@@ -9,11 +9,17 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Div, HTML
 from crispy_forms.bootstrap import FormActions
 from datetime import datetime
-from ..util import paginate
+from ..util import paginate, get_current_group
 
 # Views for Exam
 def exams_page(request):
-	exams = Exam.objects.all()
+	# check if we need to show only one group of exam
+	group = get_current_group(request)
+	if group:
+		exams = Exam.objects.filter(exam_group = group)
+	else:
+		# otherwise show all students
+		exams = Exam.objects.all()
 	# try to order exams list
 	order_by = request.GET.get('order_by', '')
 	if order_by in ('id', 'subject', 'exam_group', 'examdate', 'teacher'):

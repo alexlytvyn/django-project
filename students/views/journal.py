@@ -5,7 +5,7 @@ from calendar import monthrange, weekday, day_abbr
 from django.core.urlresolvers import reverse
 from django.views.generic.base import TemplateView
 from ..models import MonthJournal, Student
-from ..util import paginate
+from ..util import paginate, get_current_group
 from django.http import JsonResponse
 class JournalView(TemplateView):
 	template_name = 'students/journal.html'
@@ -39,8 +39,12 @@ class JournalView(TemplateView):
 		# url to update student presence, for form post
 		update_url = reverse('journal')
 		# get all students from database, or just one if we need to
-		# display journal for one student
-		if kwargs.get('pk'):
+    	# display journal for one student; also check if we need to
+    	# filter by group
+		current_group = get_current_group(self.request)
+		if current_group:
+			queryset = Student.objects.filter(student_group=current_group).order_by('last_name')
+		elif kwargs.get('pk'):
 			queryset = [Student.objects.get(pk=kwargs['pk'])]
 		else:
 			queryset = Student.objects.all().order_by('last_name')
