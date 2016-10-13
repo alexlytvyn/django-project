@@ -3,7 +3,7 @@
 {% block meta_title %}Іспити{% endblock meta_title %}
 {% block title %}Іспити{% endblock title %}
 {% block content %}
-<a href="{% url "exams_add" %}" class="btn btn-primary">Додати Іспит</a></h2>
+<a href="{% url "exams_add" %}" class="btn btn-primary" id="exam-add-form-button">Додати Іспит</a></h2>
 
 			<!-- Start exams Listing -->
 			{% if exams %}
@@ -11,27 +11,27 @@
 				{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
 				<thead>
 					<tr>
-						<th><a href="{% url "exams" %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
+						<th><a href="{% url "exams" %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}" class="content-sorting">
 							№
 							{% if order_by == 'id' and reverse != '1' %}&uarr;
 							{% elif order_by == 'id' and reverse == '1' %}&darr;
 							{% endif %}</a></th>
-						<th><a href="{% url "exams" %}?order_by=subject{% if order_by == 'subject' and reverse != '1' %}&amp;reverse=1{% endif %}">
+						<th><a href="{% url "exams" %}?order_by=subject{% if order_by == 'subject' and reverse != '1' %}&amp;reverse=1{% endif %}" class="content-sorting">
 							Назва предмета
 							{% if order_by == 'subject' and reverse != '1' %}&uarr;
 							{% elif order_by == 'subject' and reverse == '1' %}&darr;
 							{% endif %}</a></th>
-						<th><a href="{% url "exams" %}?order_by=examdate{% if order_by == 'examdate' and reverse != '1' %}&amp;reverse=1{% endif %}">
+						<th><a href="{% url "exams" %}?order_by=examdate{% if order_by == 'examdate' and reverse != '1' %}&amp;reverse=1{% endif %}" class="content-sorting">
 							Дата і час проведення
 							{% if order_by == 'examdate' and reverse != '1' %}&uarr;
 							{% elif order_by == 'examdate' and reverse == '1' %}&darr;
 							{% endif %}</a></th>
-						<th><a href="{% url "exams" %}?order_by=teacher{% if order_by == 'teacher' and reverse != '1' %}&amp;reverse=1{% endif %}">
+						<th><a href="{% url "exams" %}?order_by=teacher{% if order_by == 'teacher' and reverse != '1' %}&amp;reverse=1{% endif %}" class="content-sorting">
 							Ім'я та прізвище викладача
 							{% if order_by == 'teacher' and reverse != '1' %}&uarr;
 							{% elif order_by == 'teacher' and reverse == '1' %}&darr;
 							{% endif %}</a></th>
-						<th><a href="{% url "exams" %}?order_by=exam_group{% if order_by == 'exam_groupexam_group' and reverse != '1' %}&amp;reverse=1{% endif %}">
+						<th><a href="{% url "exams" %}?order_by=exam_group{% if order_by == 'exam_group' and reverse != '1' %}&amp;reverse=1{% endif %}" class="content-sorting">
 							Група-учасник
 							{% if order_by == 'exam_group' and reverse != '1' %}&uarr;
 							{% elif order_by == 'exam_group' and reverse == '1' %}&darr;
@@ -49,10 +49,10 @@
 								{{ forloop.counter }}
 							{% endif %}
 						</td>
-						<td><a href="{% url "exams_edit" exam.id %}">{{ exam.subject }}</td>
-						<td><a href="{% url "exams_edit" exam.id %}">{{ exam.examdate }}</td>
-						<td><a href="{% url "exams_edit" exam.id %}">{{ exam.teacher }}</td>
-						<td><a href="{% url "exams_edit" exam.id %}">{{ exam.exam_group }}</td>
+						<td><a href="{% url "exams_edit" exam.id %}" class="exam-edit-form-link">{{ exam.subject }}</td>
+						<td><a href="{% url "exams_edit" exam.id %}" class="exam-edit-form-link">{{ exam.examdate }}</td>
+						<td><a href="{% url "exams_edit" exam.id %}" class="exam-edit-form-link">{{ exam.teacher }}</td>
+						<td><a href="{% url "exams_edit" exam.id %}" class="exam-edit-form-link">{{ exam.exam_group }}</td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default dropdown-toggle"
@@ -60,8 +60,8 @@
 										<span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="{% url "exams_edit" exam.id %}">Редагувати</a></li>
-										<li><a href="{% url "exams_delete" exam.id %}">Видалити</a></li>
+										<li><a href="{% url "exams_edit" exam.id %}" class="exam-edit-form-link">Редагувати</a></li>
+										<li><a href="{% url "exams_delete" exam.id %}" class="exam-delete-form-link">Видалити</a></li>
 									</ul>
 								</div>
 							</td>

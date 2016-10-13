@@ -128,7 +128,7 @@ function initEditStudentForm(form, modal) {
   // attach datepicker and photocustomize
   initDateFields();
   initDateTimeFields();
-	initPhoto();
+	initPhotoField();
   // close modal window on Cancel button click
   form.find('input[name="cancel_button"]').click(function(event) {
     modal.modal('hide');
@@ -216,10 +216,9 @@ function initAddStudentPage() {
 } // End initAddStudentPage
 
 function initAddStudentForm(form, modal) {
-  // attach datepicker and photocustomize
+  // attach datepicker
   initDateFields();
   initDateTimeFields();
-	initPhoto();
   // close modal window on Cancel button click
   form.find('input[name="cancel_button"]').click(function(event) {
     modal.modal('hide');
@@ -394,7 +393,7 @@ function initEditGroupPage() {
 } // End initEditGroupPage
 
 function initEditGroupForm(form, modal) {
-  // attach datepicker and photocustomize
+  // attach datepicker
   initDateFields();
   initDateTimeFields();
   // close modal window on Cancel button click
@@ -484,7 +483,7 @@ function initAddGroupPage() {
 } // End initAddGroupPage
 
 function initAddGroupForm(form, modal) {
-  // attach datepicker and photocustomize
+  // attach datepicker
   initDateFields();
   initDateTimeFields();
   // close modal window on Cancel button click
@@ -661,7 +660,7 @@ function initEditExamPage() {
 } // End initEditExamPage
 
 function initEditExamForm(form, modal) {
-  // attach datepicker and photocustomize
+  // attach datepicker
   initDateFields();
   initDateTimeFields();
   // close modal window on Cancel button click
@@ -751,7 +750,7 @@ function initAddExamPage() {
 } // End initAddExamPage
 
 function initAddExamForm(form, modal) {
-  // attach datepicker and photocustomize
+  // attach datepicker
   initDateFields();
   initDateTimeFields();
   // close modal window on Cancel button click
@@ -884,92 +883,92 @@ function initDeleteExamForm(form, modal) {
   });
 } // End initDeleteExamForm
 
-// function initContactAdminPage() {
-//   $('a.contact-admin-form-button').click(function(event) {
-//     var link = $(this);
-//     $.ajax({
-//       'url': link.attr('href'),
-//       'dataType': 'html',
-//       'type': 'get',
-//       'success': function(data, status, xhr) {
-//         // check if we got successfull response from the server
-//         if (status != 'success') {
-//           alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
-//           return false;
-//         }
-//         // update modal window with arrived content from the server
-//         var modal = $('#myModal'),
-//           html = $(data),
-//           form = html.find('#content-column form');
-//         modal.find('.modal-title').html(html.find('#content-column h2').text());
-//         modal.find('.modal-body').html(form);
-//         // init our edit form
-//         initContactAdminForm(form, modal);
-//         // setup and show modal window finally
-//         modal.modal({
-//           'keyboard': true,
-//           'backdrop': false,
-//           'show': true
-//         });
-//       },
-//       'error': function() {
-//         alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
-//         return false;
-//       },
-//       'beforeSend': function() {
-//         $('.ajax-loader').show();
-//       },
-//       'complete': function() {
-//         $('.ajax-loader').hide();
-//       }
-//     });
-//     return false;
-//   });
-// } // End initContactAdminPage
-//
-// function initContactAdminForm(form, modal) {
-//   // close modal window on Cancel button click
-//   form.find('input[name="cancel_button"]').click(function(event) {
-//     modal.modal('hide');
-//     return false;
-//   });
-//   // make form work in AJAX mode
-//   form.ajaxForm({
-//     'dataType': 'html',
-//     'error': function() {
-//       alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
-//       return false;
-//     },
-//     'success': function(data, status, xhr) {
-//       var html = $(data),
-//         newform = html.find('#content-column form');
-//       // copy alert to modal window
-//       modal.find('.modal-body').html(html.find('.alert'));
-//       // copy form to modal if we found it in server response
-//       if (newform.length > 0) {
-//         modal.find('.modal-body').append(newform);
-//         // initialize form fields and buttons
-//         initContactAdminForm(newform, modal);
-//       } else {
-//         // if no form, it means success and we need to reload page
-//         // to get updated students list;
-//         // reload after 2 seconds, so that user can read
-//         // success message
-//         setTimeout(function() {
-//           location.reload(true);
-//         }, 1000);
-//       }
-//     },
-//     'beforeSend': function() {
-//       $('.ajax-loader-modal img').show();
-//       $('input, select, textarea, a, button').attr('disabled', 'disabled');
-//     },
-//     'complete': function() {
-//       $('.ajax-loader-modal img').hide();
-//       $('input, select, textarea, a, button').removeAttr('disabled', 'disabled');
-//     }
-//   });
-// } // End initContactAdminForm
+function initContactAdminPage() {
+  $('a.contact-admin-form-button').click(function(event) {
+    var link = $(this);
+    $.ajax({
+      'url': link.attr('href'),
+      'dataType': 'html',
+      'type': 'get',
+      'success': function(data, status, xhr) {
+        // check if we got successfull response from the server
+        if (status != 'success') {
+          alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+          return false;
+        }
+        // update modal window with arrived content from the server
+        var modal = $('#myModal'),
+          html = $(data),
+          form = html.find('#content-column form');
+        modal.find('.modal-title').html(html.find('#content-column h2').text());
+        modal.find('.modal-body').html(form);
+        // init our edit form
+        initEditStudentForm(form, modal);
+        // setup and show modal window finally
+        modal.modal({
+          'keyboard': false,
+          'backdrop': false,
+          'show': true
+        });
+      },
+      'error': function() {
+        alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+        return false;
+      },
+      'beforeSend': function() {
+        $('.ajax-loader').show();
+      },
+      'complete': function() {
+        $('.ajax-loader').hide();
+      }
+    });
+    return false;
+  });
+} // End initContactAdminPage
+
+function initContactAdminForm(form, modal) {
+  // close modal window on Cancel button click
+  form.find('input[name="cancel_button"]').click(function(event) {
+    modal.modal('hide');
+    return false;
+  });
+  // make form work in AJAX mode
+  form.ajaxForm({
+    'dataType': 'html',
+    'error': function() {
+      alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+      return false;
+    },
+    'success': function(data, status, xhr) {
+      var html = $(data),
+        newform = html.find('#content-column form');
+      // copy alert to modal window
+      modal.find('.modal-body').html(html.find('.alert'));
+      // copy form to modal if we found it in server response
+      if (newform.length > 0) {
+        modal.find('.modal-body').append(newform);
+        // initialize form fields and buttons
+        initContactAdminForm(newform, modal);
+      } else {
+        // if no form, it means success and we need to reload page
+        // to get updated students list;
+        // reload after 2 seconds, so that user can read
+        // success message
+        setTimeout(function() {
+          location.reload(true);
+        }, 1000);
+      }
+    },
+    'beforeSend': function() {
+      $('.ajax-loader-modal img').show();
+      $('input, select, textarea, a, button').attr('disabled', 'disabled');
+    },
+    'complete': function() {
+      $('.ajax-loader-modal img').hide();
+      $('input, select, textarea, a, button').removeAttr('disabled', 'disabled');
+    }
+  });
+} // End initContactAdminForm
 
 function initPaginatePage() {
   $(document).on("click", 'a.content-pagination', function(event) {
@@ -1074,30 +1073,67 @@ function navTabs() {
 }
 
 function closeModalBackButton() {
-  window.addEventListener('popstate', function() {
-    $('#myModal').modal('hide');
-    window.history.pushState("string", '', '');
-  });
+    window.addEventListener('popstate', function() {
+        $('#myModal').modal('hide');
+        window.history.pushState("string", '', '');
+    });
 }
 
-function initPhoto() {
-  var photo = $('#div_id_photo').find('div.controls');
-  var photolink = $(photo).find('a').attr('href');
-  if (photolink == undefined) {
-    photolink = "/data/work/virtualenvs/studentsdb/src/studentsdb/students/static/img/default_user.png"; // Вирішити питання!
-  }
-  var htmltext = "<img class='img-circle' src='" + photolink + "' height='30' width='30' /> \
-<input id='photo-clear_id' type='checkbox' name='photo-clear'> <label for='photo-clear_id'>Очистити</label><br><input id='id_photo' class='clearablefileinput' align='top' type='file' name='photo'>";
-  photo.html(htmltext);
+function initPhotoField(){
+    var imgUrl = $('#div_id_photo a').attr('href');
+    var imgHtml = '<img heigh="30" width="30" class=img-circle src=' +  imgUrl + '/>'
+    $('#div_id_photo a').html(imgHtml);
 }
+
+// function ajaxFunctional(url) {
+//   $.ajax({
+//     'url': url,
+//     'dataType': 'html',
+//     'type': 'get',
+//     'success': function(data, status, xhr) {
+//       // check if we got successfull response from the server
+//       if (status != 'success') {
+//         alert(gettext('There was an error on the server. Please, try again a bit later.'));
+//         return false;
+//       }
+//       var html = $(data),
+//         page = $(html.find("#content-column")),
+//         body = $('#content-column');
+//       body.html(page);
+//       var activeBar = $('.nav-tabs');
+//       activeBar.find('li').removeClass('active');
+//       var realActiveBar = $(data).find('.nav-tabs').find('.active');
+//       for (var i = 0; i < 5; i++) {
+//         some = activeBar.find('li:eq(' + i + ')');
+//         if (some.text() == realActiveBar.text()) {
+//           some.addClass('active');
+//         }
+//       }
+//       if (!url.contains("localhost")) {
+//         history.pushState(null, document.title, url);
+//       }
+//       window.onpopstate = function() {
+//         var modal = $('#myModal');
+//         var url2 = window.location.href;
+//         ajaxFunctional(url2);
+//       };
+//     },
+//     'error': function() {
+//       alert(gettext('There was an error on the server. Please, try again a bit later.'));
+//       return false;
+//     }
+//   });
+// }
+//
+// function UpdateAllPage() {
+//   $(document).on("click", "a.content-pagination, a.content-sorting, a.content-url, .content-group", function(event) {
+//     var link = $(this);
+//     ajaxFunctional(link.attr('href'));
+//     return false;
+//   });
+// }
 
 $(document).ready(function() {
-  initFunctions();
-  navTabs();
-  closeModalBackButton();
-});
-
-function initFunctions() {
   initJournal();
   initGroupSelector();
   initDateFields();
@@ -1111,7 +1147,10 @@ function initFunctions() {
   initEditExamPage();
   initAddExamPage();
   initDeleteExamPage();
-  // initContactAdminPage();
+  initContactAdminPage();
   initPaginatePage();
   initSortPage();
-}
+  // UpdateAllPage();
+	navTabs();
+	closeModalBackButton();
+});
