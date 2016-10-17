@@ -6,6 +6,7 @@ from studentsdb.settings import ADMIN_EMAIL
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.views.generic.edit import FormView
+import logging
 class ContactForm(forms.Form):
 	def __init__(self, *args, **kwargs):
 		# call original initializator
@@ -33,20 +34,22 @@ class ContactForm(forms.Form):
 		max_length=2560,
 		widget=forms.Textarea)
 class ContactView(FormView):
-    template_name = 'contact_admin/form.html'
-    form_class = ContactForm
-    def form_valid(self, form):
-        """This method is called for valid data"""
-        subject = form.cleaned_data['subject']
-        message = form.cleaned_data['message']
-        from_email = form.cleaned_data['from_email']
-        try:
-            send_mail(subject, message+'\n\nMessage was send from: '+from_email, 'Students DB ', [ADMIN_EMAIL])
-            # pass
-        except Exception:
-            self.message = u'Під час відправки листа виникла непередбачувана помилка. Спробуйте скористатись даною формою пізніше.'
-        else:
-            self.message = u'Повідомлення успішно надіслано.'
-        return super(ContactView, self).form_valid(form)
-    def get_success_url(self):
-        return u'%s?status_message=%s' % (reverse('contact_admin'), self.message)
+	template_name = 'contact_admin/form.html'
+	form_class = ContactForm
+	def form_valid(self, form):
+		"""This method is called for valid data"""
+		subject = form.cleaned_data['subject']
+		message = form.cleaned_data['message']
+		from_email = form.cleaned_data['from_email']
+		try:
+			send_mail(subject, message+'\n\nMessage was send from: '+from_email, 'Students DB ', [ADMIN_EMAIL])
+			# pass
+		except Exception:
+			self.message = u'Під час відправки листа виникла непередбачувана помилка. Спробуйте скористатись даною формою пізніше.'
+			logger = logging.getLogger(__name__)
+			logger.exception(message)
+		else:
+			self.message = u'Повідомлення успішно надіслано.'
+		return super(ContactView, self).form_valid(form)
+	def get_success_url(self):
+		return u'%s?status_message=%s' % (reverse('contact_admin'), self.message)
