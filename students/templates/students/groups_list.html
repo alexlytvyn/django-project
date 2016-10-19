@@ -1,9 +1,10 @@
 {% extends "students/base.html" %}
+{% load i18n %}
 {% load static from staticfiles %}
-{% block meta_title %}Групи{% endblock meta_title %}
-{% block title %}Список Груп Студентів{% endblock title %}
+{% block meta_title %}{% trans "Groups" %}{% endblock meta_title %}
+{% block title %}{% trans "List Of Students Groups" %}{% endblock title %}
 {% block content %}
-	<a href="{% url "groups_add" %}" class="btn btn-primary" id="group-add-form-button">Додати Групу</a></h2>
+	<a href="{% url "groups_add" %}" class="btn btn-primary" id="group-add-form-button">{% trans "Add Group" %}</a></h2>
 
 				<!-- Start Groups Listing -->
 				{% if groups %}
@@ -17,9 +18,9 @@
 								{% elif order_by == 'id' and reverse == '1' %}&darr;
 								{% endif %}</a></th>
 							</a></th>
-              <th><a href="{% url "groups" %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}" class="content-sorting">Назва Групи &uarr;</a></th>
-              <th><a href="#">Староста</a></th>
-              <th>Дії</th>
+              <th><a href="{% url "groups" %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}" class="content-sorting">{% trans "Group Name" %} &uarr;</a></th>
+              <th><a href="#">{% trans "Group Leader" %}</a></th>
+              <th>{% trans "Actions" %}</th>
           </thead>
 						{% endwith %}
 					<tbody>
@@ -33,16 +34,16 @@
 				        {% endif %}
 				      </td>
 							<td><a href="{% url "groups_edit" group.id %}" class="group-edit-form-link">{{ group.title }}</td>
-							<td>{% if group.leader %}<a href="{% url "students_edit" group.leader.id %}" class="student-edit-form-link">{{ group.leader.first_name }} {{ group.leader.last_name }}</a>{% else %}Немає{% endif %}</td>
+							<td>{% if group.leader %}<a href="{% url "students_edit" group.leader.id %}" class="student-edit-form-link">{{ group.leader.first_name }} {{ group.leader.last_name }}</a>{% else %}{% trans "Nothing" %}{% endif %}</td>
 									<td>
 										<div class="btn-group">
 											<button type="button" class="btn btn-default dropdown-toggle"
-											data-toggle="dropdown">Дія
+											data-toggle="dropdown">{% trans "Action" %}
 											<span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
-											<li><a href="{% url "groups_edit" group.id %}" class="group-edit-form-link">Редагувати</a></li>
-											<li><a href="{% url "groups_delete" group.id %}" class="group-delete-form-link">Видалити</a></li>
+											<li><a href="{% url "groups_edit" group.id %}" class="group-edit-form-link">{% trans "Edit" %}</a></li>
+											<li><a href="{% url "groups_delete" group.id %}" class="group-delete-form-link">{% trans "Delete" %}</a></li>
 										</ul>
 									</div>
 								</td>
@@ -52,7 +53,7 @@
         </table>
 				<!-- End Students Listing -->
 				{% else %}
-				<p>Поки немає груп у базі</p>
+				<p>{% trans "There are no groups in the base yet" %}</p>
 				{% endif %}
 				{% with object_list=groups %}
 				  {% include "students/pagination.html" %}

@@ -1,11 +1,12 @@
+{% load i18n %}
 {% load static from staticfiles %}
-
+{% trans "" %}
 <!DOCTYPE html>
 <html lang="uk">
 
 <head>
 	<meta charset="UTF-8">
-	<title>Сервіс обліку студентів - {% block meta_title %}{% endblock meta_title %}</title>
+	<title>{% trans "Students Accounting Service" %} - {% block meta_title %}{% endblock meta_title %}</title>
 	<meta name="description" value="Система Обліку Студентів Навчального Закладу" />
 	<!-- Include Styles -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,13 +24,13 @@
 
 			<!-- Logo -->
 			<div class="col-xs-8">
-				<h1>Сервіс Обліку Студентів</h1>
+				<h1>{% trans "Students Accounting Service" %}</h1>
 			</div>
 			<!-- Groups Selector -->
 			<div class="col-xs-4" id="group-selector">
-        <strong>Група:</strong>
+        <strong>{% trans "Group:" %}</strong>
         <select>
-          <option value="">Усі Студенти</option>
+          <option value="">{% trans "All Students" %}</option>
           {% for group in GROUPS %}
           <option value="{{ group.id }}"{% if group.selected %}selected="1"{% endif %}>{{ group.title }}{% if group.leader %}, {{ group.leader }}{% endif %}</option>
           {% endfor %}
@@ -43,11 +44,11 @@
 		<div class="row" id="sub-header">
 			<div class="col-xs-12">
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" {% if request.path == '/' %} class="active"{% endif %}><a href="{% url "home" %}" class="content-url">Студенти</a></li>
-					<li role="presentation" {% if '/journal' in request.path %} class="active"{% endif %}><a href="{% url "journal" %}" class="content-url">Відвідування</a></li>
-					<li role="presentation" {% if '/groups' in request.path %} class="active"{% endif %}><a href="{% url "groups" %}" class="content-url">Групи</a></li>
-					<li role="presentation" {% if '/exams' in request.path %} class="active"{% endif %}><a href="{% url "exams" %}" class="content-url">Іспити</a></li>
-					<li role="presentation" {% if '/contact-admin' in request.path %}class="active"{% endif %}><a href="{% url "contact_admin" %}" class="contact-admin-form-button content-url">Контакт</a></li>
+					<li role="presentation" {% if request.path == '/' %} class="active"{% endif %}><a href="{% url "home" %}" class="content-url">{% trans "Students" %}</a></li>
+					<li role="presentation" {% if '/journal' in request.path %} class="active"{% endif %}><a href="{% url "journal" %}" class="content-url">{% trans "Journal" %}</a></li>
+					<li role="presentation" {% if '/groups' in request.path %} class="active"{% endif %}><a href="{% url "groups" %}" class="content-url">{% trans "Groups" %}</a></li>
+					<li role="presentation" {% if '/exams' in request.path %} class="active"{% endif %}><a href="{% url "exams" %}" class="content-url">{% trans "Exams" %}</a></li>
+					<li role="presentation" {% if '/contact-admin' in request.path %}class="active"{% endif %}><a href="{% url "contact_admin" %}" class="contact-admin-form-button content-url">{% trans "Contact" %}</a></li>
 				</ul>
 			</div>
 		</div>
@@ -71,7 +72,7 @@
 		<!-- Start Footer -->
 		<div class="row" id="footer">
 			<div class="col-xs-12">
-				&copy; 2016 Сервіс Обліку Студентів
+				&copy; 2016 {% trans "Students Accounting Service" %}
 			</div>
 		</div>
 		<!-- End Footer -->
