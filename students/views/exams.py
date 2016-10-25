@@ -10,6 +10,7 @@ from crispy_forms.layout import Submit, Div, HTML
 from crispy_forms.bootstrap import FormActions
 from datetime import datetime
 from ..util import paginate, get_current_group
+from django.utils.translation import ugettext as _
 
 # Views for Exam
 def exams_page(request):
@@ -49,8 +50,8 @@ class ExamCreateForm(ModelForm):
 		# add buttons
 		self.helper.layout.append(FormActions(
 			Div(css_class = self.helper.label_class),
-			Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
-			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'exams' %}?status_message=Додавання іспиту скасовано!'>Скасувати</a>"),
+			Submit('add_button', _(u'Save'), css_class="btn btn-primary"),
+			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'exams' %}?status_message=Exam adding was canceled!'>Cancel</a>"),
 		))
 # Клас-"в'юшка" додавання іспиту
 class ExamCreateView(CreateView):
@@ -58,7 +59,7 @@ class ExamCreateView(CreateView):
     template_name = 'students/exams_edit.html'
     form_class = ExamCreateForm
     def get_success_url(self):
-		return u'%s?status_message=Іспит %s %s успішно додано!' % (reverse('exams'), self.request.POST.get('subject'), self.request.POST.get('examdate'))
+		return u'%s?status_message=%s %s %s %s' % (reverse('exams'), _(u'Exam'), self.request.POST.get('subject'), self.request.POST.get('examdate'), _(u'was added successfully!'))
 # Клас форми редагування даних про іспит
 class ExamUpdateForm(ModelForm):
     class Meta:
@@ -79,8 +80,8 @@ class ExamUpdateForm(ModelForm):
         # add buttons
         self.helper.layout.append(FormActions(
 			Div(css_class = self.helper.label_class),
-			Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
-			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'exams' %}?status_message=Редагування іспиту скасовано!'>Скасувати</a>"),
+			Submit('add_button', _(u'Save'), css_class="btn btn-primary"),
+			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'exams' %}?status_message=Exam editing was canceled!'>Cancel</a>"),
 		))
 # Клас-"в'юшка" редагування даних про іспит
 class ExamUpdateView(UpdateView):
@@ -88,10 +89,10 @@ class ExamUpdateView(UpdateView):
     template_name = 'students/exams_edit.html'
     form_class = ExamUpdateForm
     def get_success_url(self):
-        return u'%s?status_message=Іспит %s %s успішно редаговано!' % (reverse('exams'), self.request.POST.get('subject'), self.request.POST.get('examdate'))
+        return u'%s?status_message=%s %s %s %s' % (reverse('exams'),_(u'Exam'), self.request.POST.get('subject'), self.request.POST.get('examdate'), _(u'was edited successfully!'))
     def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button'):
-            return HttpResponseRedirect(u'%s?status_message=Редагування іспита відмінено!' % reverse('exams'))
+            return HttpResponseRedirect(u'%s?status_message=%s' % (reverse('exams'), _(u'Exam editing was canceled!')))
         else:
             return super(ExamUpdateView, self).post(request, *args, **kwargs)
 # Клас-"в'юшка" видалення іспиту
@@ -99,4 +100,4 @@ class ExamDeleteView(DeleteView):
 	model = Exam
 	template_name = 'students/exams_confirm_delete.html'
 	def get_success_url(self):
-		return u'%s?status_message=Іспит успішно видалено!' % reverse('exams')
+		return u'%s?status_message=%s' % (reverse('exams'), _(u'Exam was deleted successfully!'))

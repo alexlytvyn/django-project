@@ -9,6 +9,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Div, HTML
 from crispy_forms.bootstrap import FormActions
 from ..util import paginate, get_current_group
+from django.utils.translation import ugettext as _
 
 # Views for Groups
 def groups_list(request):
@@ -50,8 +51,8 @@ class GroupCreateForm(ModelForm):
 		# add buttons
 		self.helper.layout.append(FormActions(
 			Div(css_class = self.helper.label_class),
-			Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
-			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'groups' %}?status_message=Додавання групи скасовано!'>Скасувати</a>"),
+			Submit('add_button', _(u'Save'), css_class="btn btn-primary"),
+			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'groups' %}?status_message=Group adding canceled!'>Cancel</a>"),
 		))
 # Клас-"в'юшка" додавання групи
 class GroupCreateView(CreateView):
@@ -59,7 +60,7 @@ class GroupCreateView(CreateView):
     template_name = 'students/groups_edit.html'
     form_class = GroupCreateForm
     def get_success_url(self):
-		return u'%s?status_message=Групу %s успішно додано!' % (reverse('groups'), self.request.POST.get('title'))
+		return u'%s?status_message=%s %s %s' % (reverse('groups'), _(u'Group'), self.request.POST.get('title'), _(u'was added successfully!'))
 # Клас форми редагування групи
 class GroupUpdateForm(ModelForm):
     class Meta:
@@ -81,8 +82,8 @@ class GroupUpdateForm(ModelForm):
         # add buttons
         self.helper.layout.append(FormActions(
 			Div(css_class = self.helper.label_class),
-			Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
-			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'groups' %}?status_message=Редагування групи скасовано!'>Скасувати</a>"),
+			Submit('add_button', _(u'Save'), css_class="btn btn-primary"),
+			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'groups' %}?status_message=Group editing was canceled!'>Cancel</a>"),
 		))
 # Клас-"в'юшка" редагування групи
 class GroupUpdateView(UpdateView):
@@ -90,14 +91,14 @@ class GroupUpdateView(UpdateView):
     template_name = 'students/groups_edit.html'
     form_class = GroupUpdateForm
     def get_success_url(self):
-        return u'%s?status_message=Групу %s успішно редаговано!' % (reverse('groups'), self.request.POST.get('title'))
+        return u'%s?status_message=%s %s %s' % (reverse('groups'), _(u'Group'), self.request.POST.get('title'), _(u'was edited successfully!'))
     def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button'):
-            return HttpResponseRedirect(u'%s?status_message=Редагування групи відмінено!' % reverse('groups'))
+            return HttpResponseRedirect(u'%s?status_message=%s' % (reverse('groups'), _(u'Group editing was canceled!')))
         else:
             return super(GroupUpdateView, self).post(request, *args, **kwargs)
 class GroupDeleteView(DeleteView):
 	model = Group
 	template_name = 'students/groups_confirm_delete.html'
 	def get_success_url(self):
-		return u'%s?status_message=Групу успішно видалено!' % reverse('groups')
+		return u'%s?status_message=%s' % (reverse('groups'), _(u'was deleted successfully!'))
