@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
+import django.views.i18n
 import students.views.students
 import students.views.groups
 import students.views.journal
@@ -12,6 +13,10 @@ from students.views.students import StudentCreateView, StudentUpdateView, Studen
 from students.views.groups import GroupCreateView, GroupUpdateView, GroupDeleteView
 from students.views.exams import ExamCreateView, ExamUpdateView, ExamDeleteView
 from students.views.journal import JournalView
+
+js_info_dict = {
+	'packages': ('students',),
+}
 
 urlpatterns = [
     # Students urls
@@ -37,6 +42,9 @@ urlpatterns = [
 
 	# Contact Admin Form
 	url(r'^contact-admin/$', ContactView.as_view(), name='contact_admin'),
+
+	# JavaScript Code Translation
+	url(r'^jsi18n\.js$', django.views.i18n.javascript_catalog, js_info_dict, name='jstranslate'),
 
 	url(r'^admin/', include(admin.site.urls)),
 ]
