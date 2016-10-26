@@ -92,3 +92,14 @@ display: none;
 .ajax-loader-modal img{
     display: none;
 }
+
+#lang-select {
+    margin-top: 33px;
+    padding: 0;
+}
+#lang-select button {
+    padding: 0;
+}
+.lang-select-form {
+    display:inline-block;
+}
