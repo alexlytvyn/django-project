@@ -1,105 +1,118 @@
 /* Global Styles */
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .alert {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 #footer {
-    border-top: 1px solid #dddddd;
-    padding-top: 10px;
+  border-top: 1px solid #dddddd;
+  padding-top: 10px;
 }
 
 
 /* Groups Selector */
 
 #group-selector {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 #group-selector select {
-    margin: 0;
-    width: 85%;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    height: 30px;
-    line-height: 30px;
-    color: #555555;
+  margin: 0;
+  width: 85%;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  height: 30px;
+  line-height: 30px;
+  color: #555555;
 }
 
 .container {
-    margin-left: 1%;
-    margin-right: 1%;
-    padding-bottom: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
+  padding-bottom: 2%;
 }
 
 .formcontainer {
-    width: 500px;
-    padding-left: 2%;
-    padding-bottom: 2%;
+  width: 500px;
+  padding-left: 2%;
+  padding-bottom: 2%;
 }
 
 .confirmbuttons {
-    padding-bottom: 15px;
+  padding-bottom: 15px;
 }
+
 
 /* Form Styles */
 
 textarea, select, input {
-	max-width: 314px;
+  max-width: 314px;
 }
 
+
 /* Journal Table Styles */
-td.day-box,
-th.day-header {
-padding: 4px !important;
-vertical-align: middle !important;
-text-align: center;
+
+td.day-box, th.day-header {
+  padding: 4px !important;
+  vertical-align: middle !important;
+  text-align: center;
 }
 
 #ajax-progress-indicator {
-display: none;
+  display: none;
 }
 
-.ajax-loader{
-    display:none;
-    position:absolute;
-    width:100%;
-    height:100%;
-    left:0;
-    top:0;
-    background:rgba(0,0,0,0.1);
-    border-radius: 4px;
+.ajax-loader {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
 
-.ajax-loader img{
-    position:absolute;
-    left:50%;
-    top:50%;
-    margin-left: -65px;
-    margin-top: -20px;
+.ajax-loader img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -65px;
+  margin-top: -20px;
 }
 
-.ajax-loader-modal{
-    position:relative;
-    width:130px;
-    height: 20px;
-    margin: auto;
+.ajax-loader-modal {
+  position: relative;
+  width: 130px;
+  height: 20px;
+  margin: auto;
 }
-.ajax-loader-modal img{
-    display: none;
+
+.ajax-loader-modal img {
+  display: none;
 }
 
 #lang-select {
-    margin-top: 33px;
-    padding: 0;
+  margin-top: 33px;
+  padding: 0;
 }
+
 #lang-select button {
-    padding: 0;
+  padding: 0;
 }
+
 .lang-select-form {
-    display:inline-block;
+  display: inline-block;
+}
+
+
+/* User's Toolbar */
+
+#user-toolbar {
+  margin-top: 30px;
+  text-align: right;
 }

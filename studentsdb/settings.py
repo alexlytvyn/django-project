@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'crispy_forms',
+	'registration',
 	'students',
 ]
 
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django.middleware.locale.LocaleMiddleware',
@@ -55,10 +57,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'studentsdb.urls'
 
+TEMPLATE_REGISTRATION = os.path.join(BASE_DIR, 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_REGISTRATION],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,6 +131,7 @@ EMAIL_PORT = '465'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+REGISTRATION_OPEN = True
 
 LOG_FILE = os.path.join(BASE_DIR, 'studentsdb.log')
 LOGGING = {
