@@ -132,6 +132,8 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 REGISTRATION_OPEN = True
+LOGIN_URL = 'users:auth_login'
+LOGOUT_URL = 'users:auth_logout'
 
 LOG_FILE = os.path.join(BASE_DIR, 'studentsdb.log')
 LOGGING = {

@@ -11,6 +11,9 @@ from crispy_forms.layout import Submit, Div, HTML
 from crispy_forms.bootstrap import FormActions
 from ..util import paginate, get_current_group
 from django.utils.translation import ugettext as _
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
 # Views for Students
 def students_list(request):
 	# check if we need to show only one group of students
@@ -79,6 +82,9 @@ class StudentCreateView(CreateView):
 	model = Student
 	template_name = 'students/students_edit.html'
 	form_class = StudentCreateForm
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super(StudentCreateView, self).dispatch(*args, **kwargs)
 	def get_success_url(self):
 		return u'%s?status_message=%s %s %s %s' % (reverse('home'), _(u'Student'), self.request.POST.get('first_name'), self.request.POST.get('last_name'), _(u'was added successfully!'))
 # Клас-"в'юшка" редагування студента
@@ -86,6 +92,9 @@ class StudentUpdateView(UpdateView):
 	model = Student
 	template_name = 'students/students_edit.html'
 	form_class = StudentUpdateForm
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super(StudentUpdateView, self).dispatch(*args, **kwargs)
 	def get_success_url(self):
 		return u'%s?status_message=%s %s %s %s' % (reverse('home'), _(u'Student'), self.request.POST.get('first_name'), self.request.POST.get('last_name'), _(u'was edited successfully!'))
 	def post(self, request, *args, **kwargs):
@@ -98,5 +107,8 @@ class StudentUpdateView(UpdateView):
 class StudentDeleteView(DeleteView):
 	model = Student
 	template_name = 'students/students_confirm_delete.html'
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super(StudentDeleteView, self).dispatch(*args, **kwargs)
 	def get_success_url(self):
 		return u'%s?status_message=%s' % (reverse('home'), _(u'Student was deleted successfully!'))

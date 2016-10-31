@@ -11,6 +11,8 @@ from crispy_forms.bootstrap import FormActions
 from datetime import datetime
 from ..util import paginate, get_current_group
 from django.utils.translation import ugettext as _
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 # Views for Exam
 def exams_page(request):
@@ -55,49 +57,58 @@ class ExamCreateForm(ModelForm):
 		))
 # Клас-"в'юшка" додавання іспиту
 class ExamCreateView(CreateView):
-    model = Exam
-    template_name = 'students/exams_edit.html'
-    form_class = ExamCreateForm
-    def get_success_url(self):
+	model = Exam
+	template_name = 'students/exams_edit.html'
+	form_class = ExamCreateForm
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super(ExamCreateView, self).dispatch(*args, **kwargs)
+	def get_success_url(self):
 		return u'%s?status_message=%s %s %s %s' % (reverse('exams'), _(u'Exam'), self.request.POST.get('subject'), self.request.POST.get('examdate'), _(u'was added successfully!'))
 # Клас форми редагування даних про іспит
 class ExamUpdateForm(ModelForm):
-    class Meta:
-        model = Exam
-        fields = '__all__'
-    def __init__(self, *args, **kwargs):
-        super(ExamUpdateForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper(self)
-        # set form tag attributes
-        self.helper.form_action = reverse('exams_edit', kwargs={'pk': kwargs['instance'].id})
-        self.helper.form_method = 'POST'
-        self.helper.form_class = 'form-horizontal'
-        # set form field properties
-        self.helper.help_text_inline = True
-        self.helper.html5_required = True
-        self.helper.label_class = 'col-sm-2 control-label'
-        self.helper.field_class = 'col-sm-10'
-        # add buttons
-        self.helper.layout.append(FormActions(
+	class Meta:
+	  model = Exam
+	  fields = '__all__'
+	def __init__(self, *args, **kwargs):
+	  super(ExamUpdateForm, self).__init__(*args, **kwargs)
+	  self.helper = FormHelper(self)
+	  # set form tag attributes
+	  self.helper.form_action = reverse('exams_edit', kwargs={'pk': kwargs['instance'].id})
+	  self.helper.form_method = 'POST'
+	  self.helper.form_class = 'form-horizontal'
+	  # set form field properties
+	  self.helper.help_text_inline = True
+	  self.helper.html5_required = True
+	  self.helper.label_class = 'col-sm-2 control-label'
+	  self.helper.field_class = 'col-sm-10'
+	  # add buttons
+	  self.helper.layout.append(FormActions(
 			Div(css_class = self.helper.label_class),
 			Submit('add_button', _(u'Save'), css_class="btn btn-primary"),
 			HTML(u"<a class='btn btn-link' name='cancel_button' href='{% url 'exams' %}?status_message=Exam editing was canceled!'>Cancel</a>"),
 		))
 # Клас-"в'юшка" редагування даних про іспит
 class ExamUpdateView(UpdateView):
-    model = Exam
-    template_name = 'students/exams_edit.html'
-    form_class = ExamUpdateForm
-    def get_success_url(self):
-        return u'%s?status_message=%s %s %s %s' % (reverse('exams'),_(u'Exam'), self.request.POST.get('subject'), self.request.POST.get('examdate'), _(u'was edited successfully!'))
-    def post(self, request, *args, **kwargs):
-        if request.POST.get('cancel_button'):
-            return HttpResponseRedirect(u'%s?status_message=%s' % (reverse('exams'), _(u'Exam editing was canceled!')))
-        else:
-            return super(ExamUpdateView, self).post(request, *args, **kwargs)
+	model = Exam
+	template_name = 'students/exams_edit.html'
+	form_class = ExamUpdateForm
+	def get_success_url(self):
+	  return u'%s?status_message=%s %s %s %s' % (reverse('exams'),_(u'Exam'), self.request.POST.get('subject'), self.request.POST.get('examdate'), _(u'was edited successfully!'))
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super(ExamUpdateView, self).dispatch(*args, **kwargs)
+	def post(self, request, *args, **kwargs):
+	  if request.POST.get('cancel_button'):
+		return HttpResponseRedirect(u'%s?status_message=%s' % (reverse('exams'), _(u'Exam editing was canceled!')))
+	  else:
+		return super(ExamUpdateView, self).post(request, *args, **kwargs)
 # Клас-"в'юшка" видалення іспиту
 class ExamDeleteView(DeleteView):
 	model = Exam
 	template_name = 'students/exams_confirm_delete.html'
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super(ExamDeleteView, self).dispatch(*args, **kwargs)
 	def get_success_url(self):
 		return u'%s?status_message=%s' % (reverse('exams'), _(u'Exam was deleted successfully!'))
