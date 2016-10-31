@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'registration',
 	'students',
+    'stud_auth',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'studentsdb.urls'
 
-TEMPLATE_REGISTRATION = os.path.join(BASE_DIR, 'templates')
+TEMPLATE_REGISTRATION = os.path.join(BASE_DIR, 'stud_auth', 'templates')
 
 TEMPLATES = [
     {

@@ -15,7 +15,7 @@ from students.views.groups import GroupCreateView, GroupUpdateView, GroupDeleteV
 from students.views.exams import ExamCreateView, ExamUpdateView, ExamDeleteView
 from students.views.journal import JournalView
 import students.views.set_language
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, TemplateView
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 
@@ -57,6 +57,7 @@ urlpatterns = [
     url('^set-language/$', students.views.set_language.set_language, name='set_language'),
 
 	# User Related urls
+	url(r'^users/profile/$', login_required(TemplateView.as_view(template_name='registration/profile.html')), name='profile'),
 	url(r'^users/logout/$', auth_views.logout, kwargs={'next_page': 'home'}, name='auth_logout'),
 	url(r'^register/complete/$', RedirectView.as_view(pattern_name='home'), name='registration_complete'),
 	url(r'^users/', include('registration.backends.simple.urls', namespace='users')),
