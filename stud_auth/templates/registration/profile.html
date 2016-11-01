@@ -1,27 +1,56 @@
 {% extends "students/base.html" %}
 {% load i18n %}
+{% load static from staticfiles %}
 {% block meta_title %}{{ user.get_full_name|default:user.username }}{% endblock meta_title %}
 {% block title %}{{ user.get_full_name|default:user.username }}{% endblock title %}
 {% block content %}
 <table class="table table-striped">
-	{% if user.email %}
 	<tr>
-		<td>{% trans "Email" %}:</td>
-		<td>{{ user.email }}</td>
+		<td>{% trans "Photo" %}:</td>
+		<td>
+			{% if profile.stprofile.photo %}
+			<img heigh="100" width="100" src="{{ profile.stprofile.photo.url }}" class="img-rounded"/>
+			{% else %}
+			<img heigh="100" width="100" src="{% static "img/default_user.png" %}" class="img-rounded"/>
+			{% endif %}
+		</td>
 	</tr>
-	{% endif %}
+
 	{% if user.username %}
 	<tr>
 		<td>{% trans "Username" %}:</td>
 		<td>{{ user.username }}</td>
 	</tr>
 	{% endif %}
+
+	{% if user.email %}
+	<tr>
+		<td>{% trans "Email" %}:</td>
+		<td>{{ user.email }}</td>
+	</tr>
+	{% endif %}
+
 	{% if user.stprofile.mobile_phone %}
 	<tr>
 		<td>{% trans "Mobile Phone" %}:</td>
 		<td>{{ user.stprofile.mobile_phone }}</td>
 	</tr>
 	{% endif %}
+
+	{% if profile.stprofile.address %}
+	<tr>
+		<td>{% trans "Address" %}:</td>
+		<td>{{ profile.stprofile.address }}</td>
+	</tr>
+	{% endif %}
+
+	{% if profile.stprofile.passport_id %}
+	<tr>
+		<td>{% trans "Passport id" %}:</td>
+		<td>{{ profile.stprofile.passport_id }}</td>
+	</tr>
+	{% endif %}
+
 	{% if user.date_joined %}
 	<tr>
 		<td>{% trans "Joined" %}:</td>
@@ -29,4 +58,5 @@
 	</tr>
 	{% endif %}
 </table>
+
 {% endblock content %}
