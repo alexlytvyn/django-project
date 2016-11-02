@@ -7,3 +7,4 @@ django-hvad
 django-localeurl
 pytz
 django-registration-redux
+python-social-auth
