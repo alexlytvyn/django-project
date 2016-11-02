@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: templates/students/base.html:3
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-25 10:04+0000\n"
+"POT-Creation-Date: 2016-11-02 17:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,20 +34,20 @@ msgid "Teacher's Name"
 msgstr ""
 
 #: models/exams.py:21 models/groups.py:8 models/students.py:36
-#: templates/students/exams_list.html:36 views/groups.py:63 views/groups.py:94
+#: templates/students/exams_list.html:36 views/groups.py:68 views/groups.py:99
 msgid "Group"
 msgstr ""
 
-#: models/exams.py:25 views/exams.py:62 views/exams.py:92
+#: models/exams.py:25 views/exams.py:67 views/exams.py:97
 msgid "Exam"
 msgstr ""
 
-#: models/exams.py:26 templates/students/base.html:50
+#: models/exams.py:26 templates/students/base.html:84
 #: templates/students/exams_list.html:4 templates/students/exams_list.html:5
 msgid "Exams"
 msgstr ""
 
-#: models/groups.py:9 templates/students/base.html:49
+#: models/groups.py:9 templates/students/base.html:83
 #: templates/students/groups_list.html:4
 msgid "Groups"
 msgstr ""
@@ -75,7 +74,7 @@ msgid "Monthly Journals"
 msgstr ""
 
 #: models/monthjournal.py:11 models/students.py:8
-#: templates/students/journal.html:26 views/students.py:83 views/students.py:90
+#: templates/students/journal.html:26 views/students.py:89 views/students.py:99
 msgid "Student"
 msgstr ""
 
@@ -87,7 +86,7 @@ msgstr ""
 msgid "Day #"
 msgstr ""
 
-#: models/students.py:9 templates/students/base.html:47
+#: models/students.py:9 templates/students/base.html:80
 #: templates/students/students_list.html:4
 msgid "Students"
 msgstr ""
@@ -127,25 +126,37 @@ msgstr ""
 msgid "Please fix the following mistakes"
 msgstr ""
 
-#: templates/students/base.html:9 templates/students/base.html:27
-#: templates/students/base.html:75
+#: templates/students/base.html:8 templates/students/base.html:26
+#: templates/students/base.html:112
 msgid "Students Accounting Service"
 msgstr ""
 
-#: templates/students/base.html:31
+#: templates/students/base.html:52
 msgid "Group:"
 msgstr ""
 
-#: templates/students/base.html:33
+#: templates/students/base.html:54
 msgid "All Students"
 msgstr ""
 
-#: templates/students/base.html:48 templates/students/journal.html:4
-#: templates/students/journal.html:5 templates/students/students_list.html:64
+#: templates/students/base.html:63
+msgid "Logout"
+msgstr ""
+
+#: templates/students/base.html:69
+msgid "Login"
+msgstr ""
+
+#: templates/students/base.html:70
+msgid "Register"
+msgstr ""
+
+#: templates/students/base.html:82 templates/students/journal.html:4
+#: templates/students/journal.html:5 templates/students/students_list.html:70
 msgid "Journal"
 msgstr ""
 
-#: templates/students/base.html:51
+#: templates/students/base.html:87
 msgid "Contact"
 msgstr ""
 
@@ -194,17 +205,17 @@ msgid "Actions"
 msgstr ""
 
 #: templates/students/exams_list.html:60 templates/students/groups_list.html:41
-#: templates/students/students_list.html:59
+#: templates/students/students_list.html:65
 msgid "Action"
 msgstr ""
 
 #: templates/students/exams_list.html:64 templates/students/groups_list.html:45
-#: templates/students/journal.html:47 templates/students/students_list.html:63
+#: templates/students/journal.html:47 templates/students/students_list.html:69
 msgid "Edit"
 msgstr ""
 
 #: templates/students/exams_list.html:65 templates/students/groups_list.html:46
-#: templates/students/students_list.html:65
+#: templates/students/students_list.html:71
 msgid "Delete"
 msgstr ""
 
@@ -360,62 +371,78 @@ msgstr ""
 msgid "Ticket #"
 msgstr ""
 
-#: views/contact_admin.py:27
+#: views/contact_admin.py:29 views/contact_admin_class.py:28
 msgid "Send"
 msgstr ""
 
-#: views/contact_admin.py:29
+#: views/contact_admin.py:31 views/contact_admin_class.py:30
 msgid "Your Email Address"
 msgstr ""
 
-#: views/contact_admin.py:31
-msgid "Message title"
+#: views/contact_admin.py:33
+msgid "Email Subject"
 msgstr ""
 
-#: views/contact_admin.py:34
-msgid "Message text"
-msgstr ""
-
-#: views/contact_admin.py:49
-msgid "The message was not sent."
+#: views/contact_admin.py:36
+msgid "Email Body"
 msgstr ""
 
 #: views/contact_admin.py:53
+msgid "An error occured during email transfer. Please, try again later."
+msgstr ""
+
+#: views/contact_admin.py:58
+msgid "Message sent successfully!"
+msgstr ""
+
+#: views/contact_admin_class.py:32
+msgid "Message title"
+msgstr ""
+
+#: views/contact_admin_class.py:35
+msgid "Message text"
+msgstr ""
+
+#: views/contact_admin_class.py:50
+msgid "The message was not sent."
+msgstr ""
+
+#: views/contact_admin_class.py:54
 msgid "The message was sent successfully."
 msgstr ""
 
-#: views/exams.py:53 views/exams.py:83 views/groups.py:54 views/groups.py:85
+#: views/exams.py:55 views/exams.py:88 views/groups.py:56 views/groups.py:90
 msgid "Save"
 msgstr ""
 
-#: views/exams.py:62 views/groups.py:63 views/students.py:83
+#: views/exams.py:67 views/groups.py:68 views/students.py:89
 msgid "was added successfully!"
 msgstr ""
 
-#: views/exams.py:92 views/groups.py:94 views/students.py:90
+#: views/exams.py:97 views/groups.py:99 views/students.py:99
 msgid "was edited successfully!"
 msgstr ""
 
-#: views/exams.py:95
+#: views/exams.py:103
 msgid "Exam editing was canceled!"
 msgstr ""
 
-#: views/exams.py:103
+#: views/exams.py:114
 msgid "Exam was deleted successfully!"
 msgstr ""
 
-#: views/groups.py:97
+#: views/groups.py:105
 msgid "Group editing was canceled!"
 msgstr ""
 
-#: views/groups.py:104
+#: views/groups.py:115
 msgid "was deleted successfully!"
 msgstr ""
 
-#: views/students.py:93
+#: views/students.py:102
 msgid "Student editing canceled!"
 msgstr ""
 
-#: views/students.py:102
+#: views/students.py:114
 msgid "Student was deleted successfully!"
 msgstr ""
