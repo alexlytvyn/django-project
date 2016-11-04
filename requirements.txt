@@ -8,3 +8,5 @@ django-localeurl
 pytz
 django-registration-redux
 python-social-auth
+beautifulsoup4
+lxml
