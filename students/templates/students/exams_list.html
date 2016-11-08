@@ -1,6 +1,7 @@
 {% extends "students/base.html" %}
 {% load i18n %}
 {% load static from staticfiles %}
+{% load pagenav %}
 {% block meta_title %}{% trans "Exams" %}{% endblock meta_title %}
 {% block title %}{% trans "Exams" %}{% endblock title %}
 {% block content %}
@@ -74,8 +75,8 @@
 			{% else %}
 			<p>{% trans "There are no exams in the base yet." %}</p>
 			{% endif %}
-			{% with object_list=exams %}
+			<!-- {% with object_list=exams %}
 				{% include "students/pagination.html" %}
-			{% endwith %}
-
+			{% endwith %} -->
+{% pagenav object_list=exams is_paginated=is_paginated paginator=paginator %}
 {% endblock content %}

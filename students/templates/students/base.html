@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static from staticfiles %}
+{% load select_menu %}
 <!DOCTYPE html>
 <html lang="uk">
 
@@ -77,14 +78,14 @@
 		<div class="row" id="sub-header">
 			<div class="col-xs-12">
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" {% if request.path == '/' %} class="active"{% endif %}><a href="{% url "home" %}" class="content-url">{% trans "Students" %}</a></li>
+					<li role="presentation" class="active" {% select_menu 'home' %}><a href="{% url "home" %}" class="content-url">{% trans "Students" %}</a></li>
 					{% if user.is_authenticated %}
-					<li role="presentation" {% if '/journal' in request.path %} class="active"{% endif %}><a href="{% url "journal" %}" class="content-url">{% trans "Journal" %}</a></li>
-					<li role="presentation" {% if '/groups' in request.path %} class="active"{% endif %}><a href="{% url "groups" %}" class="content-url">{% trans "Groups" %}</a></li>
-					<li role="presentation" {% if '/exams' in request.path %} class="active"{% endif %}><a href="{% url "exams" %}" class="content-url">{% trans "Exams" %}</a></li>
+					<li role="presentation" {% select_menu 'journal' %}><a href="{% url "journal" %}" class="content-url">{% trans "Journal" %}</a></li>
+					<li role="presentation" {% select_menu 'groups' %}><a href="{% url "groups" %}" class="content-url">{% trans "Groups" %}</a></li>
+					<li role="presentation" {% select_menu 'exams' %}><a href="{% url "exams" %}" class="content-url">{% trans "Exams" %}</a></li>
 					{% endif %}
 					{% if perms.auth.add_user %}
-					<li role="presentation" {% if '/contact-admin' in request.path %}class="active"{% endif %}><a href="{% url "contact_admin" %}" class="contact-admin-form-button content-url">{% trans "Contact" %}</a></li>
+					<li role="presentation" {% select_menu 'contact-admin' %}><a href="{% url "contact_admin" %}" class="contact-admin-form-button content-url">{% trans "Contact" %}</a></li>
 					{% endif %}
 				</ul>
 			</div>
