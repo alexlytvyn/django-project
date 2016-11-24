@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'registration',
 	'social.apps.django_app.default',
+	'django_coverage',
 	'students',
     'stud_auth',
 ]
@@ -194,3 +195,5 @@ LOGGING = {
     }
   }
 }
+
+COVERAGE_REPORT_HTML_OUTPUT_DIR = os.path.join(BASE_DIR, '..', 'coverage')
