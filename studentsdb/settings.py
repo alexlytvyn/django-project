@@ -11,7 +11,13 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-from .db import DATABASES, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+# from .db import DATABASES, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+from .env_settings import SECRET_KEY, DEBUG, TEMPLATE_DEBUG, ALLOWED_HOSTS
+from .env_settings import SOCIAL_AUTH_FACEBOOK_SECRET, SOCIAL_AUTH_FACEBOOK_KEY
+from .env_settings import DATABASES, STATIC_URL, MEDIA_URL, MEDIA_ROOT
+from .env_settings import ADMIN_EMAIL, EMAIL_HOST, EMAIL_PORT, EMAIL_USE_SSL
+from .env_settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS
+from .env_settings import PORTAL_URL
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,14 +25,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '87++f32i75d_%=2x7=vh%!=-ozyocdp#j8olhoh4#n48mw0$#u'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -89,9 +87,6 @@ AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_FACEBOOK_KEY = '1317591021586679'
-SOCIAL_AUTH_FACEBOOK_SECRET = '4825bfb4bd8f66806a47f8e9bdf0f747'
-
 WSGI_APPLICATION = 'studentsdb.wsgi.application'
 
 
@@ -131,20 +126,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-STATIC_URL = '/static/'
-PORTAL_URL = 'http://localhost:8000'
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
-
-ADMIN_EMAIL = 'admin@studentsdb.com'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '465'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 REGISTRATION_OPEN = True
 LOGIN_URL = 'users:auth_login'
